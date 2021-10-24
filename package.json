@@ -23,7 +23,7 @@
     "clean": "rm -rf build compile" ,
     "compile": "yarn run clean && tsc",
     "babel": "babel compile/src --out-dir build",
-    "exec": "clear && node build/stdout.js",
+    "exec": "clear && node build/index.js",
     "build": "yarn compile && yarn babel",
     "start": "yarn build && yarn run exec",
     "prod": "babel compile/src --out-dir dist "
