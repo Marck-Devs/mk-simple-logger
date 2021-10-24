@@ -107,11 +107,3 @@ export class SimpleLogger {
     SimpleLogger.isStdout = false;
   }
 }
-
-let logger = new SimpleLogger("mk");
-SimpleLogger.setLogLevel("debug");
-logger.info("Info message");
-logger.error("One error {id}", { id: "this" });
-SimpleLogger.setLogLevel("critical");
-logger.error("One error {id}", { id: "this" });
-logger.critical("One critical {id}", { id: "this" });
