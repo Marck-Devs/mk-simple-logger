@@ -8,6 +8,7 @@
     "email": "marck@marck-devs.com",
     "url": "http://marck-devs.com"
   },
+  "repository": "http://gitea.marck-devs.com/marck/node-simple-logger",
   "devDependencies": {
     "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.8",
@@ -27,5 +28,7 @@
     "build": "yarn compile && yarn babel",
     "start": "yarn build && yarn run exec",
     "prod": "babel compile/src --out-dir dist "
-  }
+  },
+  "displayName": "simple-logger"
+
 }
