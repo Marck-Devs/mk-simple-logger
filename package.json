@@ -1,0 +1,31 @@
+{
+  "name": "node-logger",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Marck C. Guzman",
+    "email": "marck@marck-devs.com",
+    "url": "http://marck-devs.com"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-typescript": "^7.15.0",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "ansi-colors": "^4.1.1",
+    "core-js": "3"
+  },
+  "scripts": {
+    "clean": "rm -rf build compile" ,
+    "compile": "yarn run clean && tsc",
+    "babel": "babel compile/src --out-dir build",
+    "exec": "clear && node build/stdout.js",
+    "build": "yarn compile && yarn babel",
+    "start": "yarn build && yarn run exec",
+    "prod": "babel compile/src --out-dir dist "
+  }
+}

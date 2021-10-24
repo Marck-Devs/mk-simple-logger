@@ -1,0 +1,4 @@
+build
+compile
+node_modules
+*.lock

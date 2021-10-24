@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "rootDir": "./",
+    "target": "ES2016",
+    "outDir": "compile/",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "declaration": true
+  },
+  "exclude": [
+    "compile",
+    "build"
+  ]
+}
