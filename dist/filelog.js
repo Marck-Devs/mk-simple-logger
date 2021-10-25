@@ -146,7 +146,7 @@ var FileLogger = function () {
     this.writeLog(line);
   };
 
-  FileLogger.prototype.setFortmat = function (format) {
+  FileLogger.prototype.setFormat = function (format) {
     this.format = format;
     return this;
   };

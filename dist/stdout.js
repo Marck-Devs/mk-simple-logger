@@ -131,7 +131,7 @@ var StLogger = function () {
     console.log(line);
   };
 
-  StLogger.prototype.setFortmat = function (format) {
+  StLogger.prototype.setFormat = function (format) {
     this.format = format;
     return this;
   };

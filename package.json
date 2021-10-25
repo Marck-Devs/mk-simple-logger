@@ -1,6 +1,6 @@
 {
   "name": "mk-simple-logger",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "main": "dist/index.js",
   "license": "MIT",
   "author": "Marck C. Guzman <marck@marck-devs.com> (http://marck-devs.com)",
@@ -20,13 +20,13 @@
     "core-js": "3"
   },
   "scripts": {
-    "clean": "rm -rf build compile",
+    "clean": "rm -rf build compile dist",
     "compile": "yarn run clean && tsc",
     "babel": "babel compile/src --out-dir build",
     "exec": "clear && node build/index.js",
     "build": "yarn compile && yarn babel",
     "start": "yarn build && yarn run exec",
-    "prod": "babel compile/src --out-dir dist "
+    "prod": "yarn clean && yarn compile &&  yarn babel compile/src --out-dir dist "
   },
   "displayName": "simple-logger",
   "description": "Simple logger for node",

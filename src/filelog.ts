@@ -116,7 +116,7 @@ export class FileLogger {
     this.writeLog(line);
   }
 
-  public setFortmat(format): FileLogger {
+  public setFormat(format): FileLogger {
     this.format = format;
     return this;
   }

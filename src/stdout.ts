@@ -104,7 +104,7 @@ export class StLogger {
     console.log(line);
   }
 
-  public setFortmat(format): StLogger {
+  public setFormat(format): StLogger {
     this.format = format;
     return this;
   }

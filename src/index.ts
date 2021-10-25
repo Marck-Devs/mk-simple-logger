@@ -24,12 +24,12 @@ export class SimpleLogger {
     SimpleLogger.fileLogger = FileLogger.getLogger();
     SimpleLogger.fileLogger.setLogLevel(SimpleLogger.logLevel);
     SimpleLogger.fileLogger.setLogFile(SimpleLogger.logFile);
-    SimpleLogger.fileLogger.setFortmat(SimpleLogger.format);
+    SimpleLogger.fileLogger.setFormat(SimpleLogger.format);
     SimpleLogger.fileLogger.setDateFormat(SimpleLogger.dateFormat);
     SimpleLogger.fileLogger.setErrorFile(SimpleLogger.errorFile);
     SimpleLogger.stLogger = StLogger.getLogger();
     SimpleLogger.stLogger.setLogLevel(SimpleLogger.logLevel);
-    SimpleLogger.stLogger.setFortmat(SimpleLogger.format);
+    SimpleLogger.stLogger.setFormat(SimpleLogger.format);
     SimpleLogger.stLogger.setDateFormat(SimpleLogger.dateFormat);
     this.name = name;
   }
@@ -105,5 +105,17 @@ export class SimpleLogger {
 
   public static disableStdout() {
     SimpleLogger.isStdout = false;
+  }
+
+  public static setFormat(format: string) {
+    SimpleLogger.format = format;
+    SimpleLogger.fileLogger.setFormat(format);
+    SimpleLogger.stLogger.setFormat(format);
+  }
+
+  public static setDateFormat(format: string) {
+    SimpleLogger.format = format;
+    SimpleLogger.fileLogger.setDateFormat(format);
+    SimpleLogger.stLogger.setDateFormat(format);
   }
 }

@@ -1,13 +1,59 @@
 "use strict";
 
+require("core-js/modules/es.object.create.js");
+
+require("core-js/modules/es.object.define-property.js");
+
 require("core-js/modules/es.function.name.js");
 
+var __createBinding = void 0 && (void 0).__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = void 0 && (void 0).__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = void 0 && (void 0).__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 exports.__esModule = true;
-exports.SimpleLogger = void 0;
+exports.SimpleLogger = exports.color = void 0;
 
 var filelog_1 = require("./filelog");
 
 var stdout_1 = require("./stdout");
+
+var _color = __importStar(require("ansi-colors"));
+
+function color() {
+  return _color;
+}
+
+exports.color = color;
 
 var SimpleLogger = function () {
   function SimpleLogger(name) {
@@ -18,12 +64,12 @@ var SimpleLogger = function () {
     SimpleLogger.fileLogger = filelog_1.FileLogger.getLogger();
     SimpleLogger.fileLogger.setLogLevel(SimpleLogger.logLevel);
     SimpleLogger.fileLogger.setLogFile(SimpleLogger.logFile);
-    SimpleLogger.fileLogger.setFortmat(SimpleLogger.format);
+    SimpleLogger.fileLogger.setFormat(SimpleLogger.format);
     SimpleLogger.fileLogger.setDateFormat(SimpleLogger.dateFormat);
     SimpleLogger.fileLogger.setErrorFile(SimpleLogger.errorFile);
     SimpleLogger.stLogger = stdout_1.StLogger.getLogger();
     SimpleLogger.stLogger.setLogLevel(SimpleLogger.logLevel);
-    SimpleLogger.stLogger.setFortmat(SimpleLogger.format);
+    SimpleLogger.stLogger.setFormat(SimpleLogger.format);
     SimpleLogger.stLogger.setDateFormat(SimpleLogger.dateFormat);
     this.name = name;
   }
@@ -144,6 +190,18 @@ var SimpleLogger = function () {
     SimpleLogger.isStdout = false;
   };
 
+  SimpleLogger.setFormat = function (format) {
+    SimpleLogger.format = format;
+    SimpleLogger.fileLogger.setFormat(format);
+    SimpleLogger.stLogger.setFormat(format);
+  };
+
+  SimpleLogger.setDateFormat = function (format) {
+    SimpleLogger.format = format;
+    SimpleLogger.fileLogger.setDateFormat(format);
+    SimpleLogger.stLogger.setDateFormat(format);
+  };
+
   SimpleLogger.logLevel = "warn";
   SimpleLogger.isStdout = true;
   SimpleLogger.isFile = false;
@@ -155,16 +213,3 @@ var SimpleLogger = function () {
 }();
 
 exports.SimpleLogger = SimpleLogger;
-var logger = new SimpleLogger("mk");
-SimpleLogger.setLogLevel("debug");
-logger.info("Info message");
-logger.error("One error {id}", {
-  id: "this"
-});
-SimpleLogger.setLogLevel("critical");
-logger.error("One error {id}", {
-  id: "this"
-});
-logger.critical("One critical {id}", {
-  id: "this"
-});
