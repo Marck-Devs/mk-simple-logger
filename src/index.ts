@@ -111,6 +111,7 @@ export class SimpleLogger {
    * @param {string} level the minimun level to show
    */
   public static setLogLevel(level: string) {
+    SimpleLogger.logLevel = level;
     SimpleLogger.stLogger.setLogLevel(level);
     SimpleLogger.fileLogger.setLogLevel(level);
   }
