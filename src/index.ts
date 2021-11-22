@@ -14,8 +14,8 @@ export class SimpleLogger {
   private static _instance: SimpleLogger;
   private static isStdout: boolean = true;
   private static isFile: boolean = false;
-  private static logFile: string = "app.log";
-  private static errorFile: string = null;
+  private static logFile: string;
+  private static errorFile: string;
   private static stLogger: StLogger;
   private static fileLogger: FileLogger;
   private static format: string = "{date} [ {level} ] -> {name} -> {msg}";
@@ -34,6 +34,7 @@ export class SimpleLogger {
     SimpleLogger.stLogger.setLogLevel(SimpleLogger.logLevel);
     SimpleLogger.stLogger.setFormat(SimpleLogger.format);
     SimpleLogger.stLogger.setDateFormat(SimpleLogger.dateFormat);
+
     this.name = name;
   }
 
@@ -92,6 +93,7 @@ export class SimpleLogger {
    * @param {string} file the file to dump logs
    */
   public static setLogFile(file: string) {
+    SimpleLogger.logFile = file;
     SimpleLogger.fileLogger.setLogFile(file);
   }
 
@@ -100,6 +102,7 @@ export class SimpleLogger {
    * @param {string} file the file to dump error's logs
    */
   public static setErrorFile(file: string) {
+    SimpleLogger.errorFile = file;
     SimpleLogger.fileLogger.setErrorFile(file);
   }
 
@@ -135,7 +138,7 @@ export class SimpleLogger {
   }
 
   public static setDateFormat(format: string) {
-    SimpleLogger.format = format;
+    SimpleLogger.dateFormat = format;
     SimpleLogger.fileLogger.setDateFormat(format);
     SimpleLogger.stLogger.setDateFormat(format);
   }

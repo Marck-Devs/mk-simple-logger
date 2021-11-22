@@ -3,3 +3,6 @@ compile
 node_modules
 *.lock
 src
+test
+*.log
+tsconfig.json
