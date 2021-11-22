@@ -4,7 +4,7 @@ exports.FileLogger = void 0;
 var utils_1 = require("./utils");
 var fs_1 = require("fs");
 var levels_1 = require("./levels");
-var FileLogger = (function () {
+var FileLogger = /** @class */ (function () {
     function FileLogger() {
         this.format = "{date} - [ {level} ] - {msg}";
         this.dateFormat = "{weekDay} {day}/{month}/{year} : {hour}:{min}:{sec}";

@@ -4,7 +4,7 @@ exports.StLogger = void 0;
 var utils_1 = require("./utils");
 var theming_1 = require("./theming");
 var levels_1 = require("./levels");
-var StLogger = (function () {
+var StLogger = /** @class */ (function () {
     function StLogger(them) {
         this.format = "{date} - [ {level} ] - {msg}";
         this.dateFormat = "{weekDay} {day}/{month}/{year} : {hour}:{min}:{sec}";
@@ -42,7 +42,7 @@ var StLogger = (function () {
         var _data = data;
         _data.msg = utils_1.Formatter.formatObj(msg, data);
         _data = this.buildEssentials(_data);
-        _data.level = this.theme.info("INFO");
+        _data.level = this.theme.info.underline("INFO");
         var line = utils_1.Formatter.formatObj(this.format, _data);
         console.log(line);
     };
@@ -53,7 +53,7 @@ var StLogger = (function () {
         var _data = data;
         _data.msg = this.theme.warning(utils_1.Formatter.formatObj(msg, data));
         _data = this.buildEssentials(_data);
-        _data.level = this.theme.warning("WARN");
+        _data.level = this.theme.warning.bold("WARN");
         var line = utils_1.Formatter.formatObj(this.format, _data);
         console.log(line);
     };
@@ -64,7 +64,7 @@ var StLogger = (function () {
         var _data = data;
         _data.msg = this.theme.danger(utils_1.Formatter.formatObj(msg, data));
         _data = this.buildEssentials(_data);
-        _data.level = this.theme.danger("ERROR");
+        _data.level = this.theme.danger.bold("ERROR");
         var line = utils_1.Formatter.formatObj(this.format, _data);
         console.error(line);
     };
@@ -73,9 +73,9 @@ var StLogger = (function () {
         if (!this.check("log"))
             return;
         var _data = data;
-        _data.msg = this.theme.danger(utils_1.Formatter.formatObj(msg, data));
+        _data.msg = (utils_1.Formatter.formatObj(msg, data));
         _data = this.buildEssentials(_data);
-        _data.level = this.theme.danger("LOG");
+        _data.level = this.theme.warning.underline("LOG");
         var line = utils_1.Formatter.formatObj(this.format, _data);
         console.log(line);
     };
@@ -97,7 +97,7 @@ var StLogger = (function () {
         var _data = data;
         _data.msg = utils_1.Formatter.formatObj(msg, data);
         _data = this.buildEssentials(_data);
-        _data.level = this.theme.primary("DEBUG");
+        _data.level = this.theme.primary.bold("DEBUG");
         var line = utils_1.Formatter.formatObj(this.format, _data);
         console.log(line);
     };

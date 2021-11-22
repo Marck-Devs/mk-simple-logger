@@ -1,7 +1,7 @@
 "use strict";
 exports.__esModule = true;
 exports.LogLevel = void 0;
-var LogLevel = (function () {
+var LogLevel = /** @class */ (function () {
     function LogLevel() {
     }
     LogLevel.checkLevel = function (inlevel, target) {

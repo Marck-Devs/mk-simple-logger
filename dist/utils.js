@@ -1,7 +1,10 @@
 "use strict";
 exports.__esModule = true;
 exports.Formatter = void 0;
-var Formatter = (function () {
+var Formatter = /** @class */ (function () {
+    /**
+     *
+     */
     function Formatter() {
     }
     Formatter.formatObj = function (line, data) {

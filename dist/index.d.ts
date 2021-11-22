@@ -1,88 +1,14 @@
 import { ThemeBuilder } from "./theming";
-import * as _color from "chalk";
-export declare function color(): {
-    default: _color.Chalk & _color.ChalkFunction & {
-        supportsColor: false | _color.ColorSupport;
-        Level: _color.Level;
-        Color: ("black" | "red" | "green" | "yellow" | "blue" | "magenta" | "cyan" | "white" | "gray" | "grey" | "blackBright" | "redBright" | "greenBright" | "yellowBright" | "blueBright" | "magentaBright" | "cyanBright" | "whiteBright") | ("bgBlack" | "bgRed" | "bgGreen" | "bgYellow" | "bgBlue" | "bgMagenta" | "bgCyan" | "bgWhite" | "bgGray" | "bgGrey" | "bgBlackBright" | "bgRedBright" | "bgGreenBright" | "bgYellowBright" | "bgBlueBright" | "bgMagentaBright" | "bgCyanBright" | "bgWhiteBright");
-        ForegroundColor: "black" | "red" | "green" | "yellow" | "blue" | "magenta" | "cyan" | "white" | "gray" | "grey" | "blackBright" | "redBright" | "greenBright" | "yellowBright" | "blueBright" | "magentaBright" | "cyanBright" | "whiteBright";
-        BackgroundColor: "bgBlack" | "bgRed" | "bgGreen" | "bgYellow" | "bgBlue" | "bgMagenta" | "bgCyan" | "bgWhite" | "bgGray" | "bgGrey" | "bgBlackBright" | "bgRedBright" | "bgGreenBright" | "bgYellowBright" | "bgBlueBright" | "bgMagentaBright" | "bgCyanBright" | "bgWhiteBright";
-        Modifiers: "reset" | "bold" | "dim" | "italic" | "underline" | "inverse" | "hidden" | "strikethrough" | "visible";
-        stderr: _color.Chalk & {
-            supportsColor: false | _color.ColorSupport;
-        };
-    };
-    Instance: _color.Instance;
-    level: _color.Level;
-    hex(color: string): _color.Chalk;
-    keyword(color: string): _color.Chalk;
-    rgb(red: number, green: number, blue: number): _color.Chalk;
-    hsl(hue: number, saturation: number, lightness: number): _color.Chalk;
-    hsv(hue: number, saturation: number, value: number): _color.Chalk;
-    hwb(hue: number, whiteness: number, blackness: number): _color.Chalk;
-    ansi(code: number): _color.Chalk;
-    ansi256(index: number): _color.Chalk;
-    bgHex(color: string): _color.Chalk;
-    bgKeyword(color: string): _color.Chalk;
-    bgRgb(red: number, green: number, blue: number): _color.Chalk;
-    bgHsl(hue: number, saturation: number, lightness: number): _color.Chalk;
-    bgHsv(hue: number, saturation: number, value: number): _color.Chalk;
-    bgHwb(hue: number, whiteness: number, blackness: number): _color.Chalk;
-    bgAnsi(code: number): _color.Chalk;
-    bgAnsi256(index: number): _color.Chalk;
-    reset: _color.Chalk;
-    bold: _color.Chalk;
-    dim: _color.Chalk;
-    italic: _color.Chalk;
-    underline: _color.Chalk;
-    inverse: _color.Chalk;
-    hidden: _color.Chalk;
-    strikethrough: _color.Chalk;
-    visible: _color.Chalk;
-    black: _color.Chalk;
-    red: _color.Chalk;
-    green: _color.Chalk;
-    yellow: _color.Chalk;
-    blue: _color.Chalk;
-    magenta: _color.Chalk;
-    cyan: _color.Chalk;
-    white: _color.Chalk;
-    gray: _color.Chalk;
-    grey: _color.Chalk;
-    blackBright: _color.Chalk;
-    redBright: _color.Chalk;
-    greenBright: _color.Chalk;
-    yellowBright: _color.Chalk;
-    blueBright: _color.Chalk;
-    magentaBright: _color.Chalk;
-    cyanBright: _color.Chalk;
-    whiteBright: _color.Chalk;
-    bgBlack: _color.Chalk;
-    bgRed: _color.Chalk;
-    bgGreen: _color.Chalk;
-    bgYellow: _color.Chalk;
-    bgBlue: _color.Chalk;
-    bgMagenta: _color.Chalk;
-    bgCyan: _color.Chalk;
-    bgWhite: _color.Chalk;
-    bgGray: _color.Chalk;
-    bgGrey: _color.Chalk;
-    bgBlackBright: _color.Chalk;
-    bgRedBright: _color.Chalk;
-    bgGreenBright: _color.Chalk;
-    bgYellowBright: _color.Chalk;
-    bgBlueBright: _color.Chalk;
-    bgMagentaBright: _color.Chalk;
-    bgCyanBright: _color.Chalk;
-    bgWhiteBright: _color.Chalk;
-    supportsColor: false | _color.ColorSupport;
-    Level: _color.Level;
+import chalk from "chalk";
+export declare function color(): chalk.Chalk & chalk.ChalkFunction & {
+    supportsColor: false | chalk.ColorSupport;
+    Level: chalk.Level;
     Color: ("black" | "red" | "green" | "yellow" | "blue" | "magenta" | "cyan" | "white" | "gray" | "grey" | "blackBright" | "redBright" | "greenBright" | "yellowBright" | "blueBright" | "magentaBright" | "cyanBright" | "whiteBright") | ("bgBlack" | "bgRed" | "bgGreen" | "bgYellow" | "bgBlue" | "bgMagenta" | "bgCyan" | "bgWhite" | "bgGray" | "bgGrey" | "bgBlackBright" | "bgRedBright" | "bgGreenBright" | "bgYellowBright" | "bgBlueBright" | "bgMagentaBright" | "bgCyanBright" | "bgWhiteBright");
     ForegroundColor: "black" | "red" | "green" | "yellow" | "blue" | "magenta" | "cyan" | "white" | "gray" | "grey" | "blackBright" | "redBright" | "greenBright" | "yellowBright" | "blueBright" | "magentaBright" | "cyanBright" | "whiteBright";
     BackgroundColor: "bgBlack" | "bgRed" | "bgGreen" | "bgYellow" | "bgBlue" | "bgMagenta" | "bgCyan" | "bgWhite" | "bgGray" | "bgGrey" | "bgBlackBright" | "bgRedBright" | "bgGreenBright" | "bgYellowBright" | "bgBlueBright" | "bgMagentaBright" | "bgCyanBright" | "bgWhiteBright";
     Modifiers: "reset" | "bold" | "dim" | "italic" | "underline" | "inverse" | "hidden" | "strikethrough" | "visible";
-    stderr: _color.Chalk & {
-        supportsColor: false | _color.ColorSupport;
+    stderr: chalk.Chalk & {
+        supportsColor: false | chalk.ColorSupport;
     };
 };
 export declare function ThemeBuild(): ThemeBuilder;
@@ -99,6 +25,11 @@ export declare class SimpleLogger {
     private static dateFormat;
     private name;
     constructor(name?: string);
+    /**
+     * Set the name of the logger
+     * @param {string} name name of the logger
+     * @returns current logger
+     */
     setName(name: string): SimpleLogger;
     info(msg: any, data?: any): void;
     debug(msg: any, data?: any): void;
@@ -107,8 +38,20 @@ export declare class SimpleLogger {
     critical(msg: any, data?: any): void;
     log(msg: any, data?: any): void;
     static setTheme(theme: ThemeBuilder): void;
+    /**
+     * set the output file
+     * @param {string} file the file to dump logs
+     */
     static setLogFile(file: string): void;
+    /**
+     * Set the erro file
+     * @param {string} file the file to dump error's logs
+     */
     static setErrorFile(file: string): void;
+    /**
+     * Set the log level
+     * @param {string} level the minimun level to show
+     */
     static setLogLevel(level: string): void;
     static enableFileLog(): void;
     static disableFileLog(): void;

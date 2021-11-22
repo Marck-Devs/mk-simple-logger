@@ -1,39 +1,23 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
 exports.ThemeBuilder = void 0;
-var color = __importStar(require("chalk"));
-var ThemeBuilder = (function () {
+var chalk_1 = __importDefault(require("chalk"));
+var ThemeBuilder = /** @class */ (function () {
     function ThemeBuilder() {
         this["default"] = {
-            danger: color.red,
-            primary: color.green,
-            success: color.bgGreen.black,
-            warning: color.yellow,
-            info: color.blue,
-            critical: color.bgRed.whiteBright
+            danger: chalk_1["default"].red,
+            primary: chalk_1["default"].green,
+            success: chalk_1["default"].black,
+            warning: chalk_1["default"].yellow,
+            info: chalk_1["default"].blue,
+            critical: chalk_1["default"].bgRed
         };
     }
     ThemeBuilder.prototype.danger = function (colorhex) {
-        this["default"].danger = color.hex(colorhex);
+        this["default"].danger = (colorhex);
         return this;
     };
     ThemeBuilder.prototype.critical = function (colorhex) {
@@ -41,19 +25,19 @@ var ThemeBuilder = (function () {
         return this;
     };
     ThemeBuilder.prototype.primary = function (colorhex) {
-        this["default"].primary = color.hex(colorhex);
+        this["default"].primary = (colorhex);
         return this;
     };
     ThemeBuilder.prototype.success = function (colorhex) {
-        this["default"].success = color.hex(colorhex);
+        this["default"].success = (colorhex);
         return this;
     };
     ThemeBuilder.prototype.warning = function (colorhex) {
-        this["default"].warning = color.hex(colorhex);
+        this["default"].warning = (colorhex);
         return this;
     };
     ThemeBuilder.prototype.info = function (colorhex) {
-        this["default"].info = color.hex(colorhex);
+        this["default"].info = (colorhex);
         return this;
     };
     ThemeBuilder.prototype.build = function () {

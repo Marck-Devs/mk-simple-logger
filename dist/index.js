@@ -1,38 +1,22 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
 exports.SimpleLogger = exports.ThemeBuild = exports.color = void 0;
 var filelog_1 = require("./filelog");
 var stdout_1 = require("./stdout");
 var theming_1 = require("./theming");
-var _color = __importStar(require("chalk"));
+var chalk_1 = __importDefault(require("chalk"));
 function color() {
-    return _color;
+    return chalk_1["default"];
 }
 exports.color = color;
 function ThemeBuild() {
     return new theming_1.ThemeBuilder();
 }
 exports.ThemeBuild = ThemeBuild;
-var SimpleLogger = (function () {
+var SimpleLogger = /** @class */ (function () {
     function SimpleLogger(name) {
         if (name === void 0) { name = "app"; }
         SimpleLogger.fileLogger = filelog_1.FileLogger.getLogger();
@@ -47,6 +31,11 @@ var SimpleLogger = (function () {
         SimpleLogger.stLogger.setDateFormat(SimpleLogger.dateFormat);
         this.name = name;
     }
+    /**
+     * Set the name of the logger
+     * @param {string} name name of the logger
+     * @returns current logger
+     */
     SimpleLogger.prototype.setName = function (name) {
         this.name = name;
         return this;
@@ -108,13 +97,28 @@ var SimpleLogger = (function () {
     SimpleLogger.setTheme = function (theme) {
         SimpleLogger.stLogger.setTheme(theme);
     };
+    /**
+     * set the output file
+     * @param {string} file the file to dump logs
+     */
     SimpleLogger.setLogFile = function (file) {
+        SimpleLogger.logFile = file;
         SimpleLogger.fileLogger.setLogFile(file);
     };
+    /**
+     * Set the erro file
+     * @param {string} file the file to dump error's logs
+     */
     SimpleLogger.setErrorFile = function (file) {
+        SimpleLogger.errorFile = file;
         SimpleLogger.fileLogger.setErrorFile(file);
     };
+    /**
+     * Set the log level
+     * @param {string} level the minimun level to show
+     */
     SimpleLogger.setLogLevel = function (level) {
+        SimpleLogger.logLevel = level;
         SimpleLogger.stLogger.setLogLevel(level);
         SimpleLogger.fileLogger.setLogLevel(level);
     };
@@ -136,15 +140,13 @@ var SimpleLogger = (function () {
         SimpleLogger.stLogger.setFormat(format);
     };
     SimpleLogger.setDateFormat = function (format) {
-        SimpleLogger.format = format;
+        SimpleLogger.dateFormat = format;
         SimpleLogger.fileLogger.setDateFormat(format);
         SimpleLogger.stLogger.setDateFormat(format);
     };
     SimpleLogger.logLevel = "warn";
     SimpleLogger.isStdout = true;
     SimpleLogger.isFile = false;
-    SimpleLogger.logFile = "app.log";
-    SimpleLogger.errorFile = null;
     SimpleLogger.format = "{date} [ {level} ] -> {name} -> {msg}";
     SimpleLogger.dateFormat = "{day}-{month}-{y} @ {hour}:{min}:{sec}";
     return SimpleLogger;
