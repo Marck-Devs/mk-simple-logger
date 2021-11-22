@@ -2,9 +2,12 @@ import { FileLogger } from "./filelog";
 import { LogLevel } from "./levels";
 import { StLogger } from "./stdout";
 import { ThemeBuilder } from "./theming";
-import * as _color from "ansi-colors";
+import * as _color from "chalk";
 export function color() {
   return _color;
+}
+export function ThemeBuild() {
+  return new ThemeBuilder();
 }
 export class SimpleLogger {
   private static logLevel: string = "warn";

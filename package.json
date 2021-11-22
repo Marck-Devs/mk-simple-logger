@@ -6,22 +6,18 @@
   "author": "Marck C. Guzman <marck@marck-devs.com> (http://marck-devs.com)",
   "repository": {
     "type": "git",
-    "url": "http://gitea.marck-devs.com/marck/node-simple-logger"
+    "url": "https://github.com/Marck-Devs/node-simple-logger"
   },
   "devDependencies": {
-    "@babel/cli": "^7.15.7",
-    "@babel/core": "^7.15.8",
-    "@babel/preset-env": "^7.15.8",
-    "@babel/preset-typescript": "^7.15.0",
-    "typescript": "^4.4.4"
+    "tsc": "^2.0.3",
+    "typescript": "^4.5.2"
   },
   "dependencies": {
-    "ansi-colors": "^4.1.1",
-    "core-js": "3"
+    "chalk": "^4.1.2"
   },
   "scripts": {
     "clean": "rm -rf build compile dist",
-    "compile": "yarn run clean && tsc",
+    "compile": "npx tsc",
     "babel": "babel compile/src --out-dir build",
     "exec": "clear && node build/index.js",
     "build": "yarn compile && yarn babel",

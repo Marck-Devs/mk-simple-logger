@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "rootDir": "./",
-    "outDir": "compile",
+    "rootDir": "./src/",
+    "outDir": "dist",
     "moduleResolution": "node",
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -18,6 +18,8 @@
   },
   "exclude": [
     "compile",
-    "build"
+    "build",
+    "dist",
+    "test"
   ]
 }

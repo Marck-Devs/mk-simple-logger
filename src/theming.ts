@@ -1,4 +1,4 @@
-import * as color from "ansi-colors";
+import * as color from "chalk";
 export class ThemeBuilder {
   private default: any;
 
@@ -12,33 +12,33 @@ export class ThemeBuilder {
       critical: color.bgRed.whiteBright,
     };
   }
-  danger(color) {
-    this.default.danger = color;
+  danger(colorhex: string) {
+    this.default.danger = color.hex(colorhex);
     return this;
   }
 
-  critical(color) {
-    this.default.critical = color;
+  critical(colorhex) {
+    this.default.critical = colorhex;
     return this;
   }
 
-  primary(color) {
-    this.default.primary = color;
+  primary(colorhex) {
+    this.default.primary = color.hex(colorhex);
     return this;
   }
 
-  success(color) {
-    this.default.success = color;
+  success(colorhex) {
+    this.default.success = color.hex(colorhex);
     return this;
   }
 
-  warning(color) {
-    this.default.warning = color;
+  warning(colorhex) {
+    this.default.warning = color.hex(colorhex);
     return this;
   }
 
-  info(color) {
-    this.default.info = color;
+  info(colorhex) {
+    this.default.info = color.hex(colorhex);
     return this;
   }
   build() {
