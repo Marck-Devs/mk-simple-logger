@@ -11,7 +11,7 @@ export class FileLogger {
     "{weekDay} {day}/{month}/{year} : {hour}:{min}:{sec}";
   private static _instance: FileLogger;
 
-  private constructor() {}
+  private constructor() { }
 
   public static getLogger() {
     if (!FileLogger._instance) FileLogger._instance = new FileLogger();

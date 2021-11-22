@@ -2,9 +2,9 @@ import { FileLogger } from "./filelog";
 import { LogLevel } from "./levels";
 import { StLogger } from "./stdout";
 import { ThemeBuilder } from "./theming";
-import * as _color from "chalk";
+import chalk from "chalk";
 export function color() {
-  return _color;
+  return chalk;
 }
 export function ThemeBuild() {
   return new ThemeBuilder();
@@ -37,6 +37,11 @@ export class SimpleLogger {
     this.name = name;
   }
 
+  /**
+   * Set the name of the logger 
+   * @param {string} name name of the logger
+   * @returns current logger
+   */
   public setName(name: string): SimpleLogger {
     this.name = name;
     return this;
@@ -78,17 +83,30 @@ export class SimpleLogger {
     if (SimpleLogger.isFile) SimpleLogger.fileLogger.log(msg, data);
     if (SimpleLogger.isStdout) SimpleLogger.stLogger.log(msg, data);
   }
+
   public static setTheme(theme: ThemeBuilder) {
     SimpleLogger.stLogger.setTheme(theme);
   }
+  /**
+   * set the output file
+   * @param {string} file the file to dump logs
+   */
   public static setLogFile(file: string) {
     SimpleLogger.fileLogger.setLogFile(file);
   }
 
+  /**
+   * Set the erro file
+   * @param {string} file the file to dump error's logs
+   */
   public static setErrorFile(file: string) {
     SimpleLogger.fileLogger.setErrorFile(file);
   }
 
+  /**
+   * Set the log level
+   * @param {string} level the minimun level to show
+   */
   public static setLogLevel(level: string) {
     SimpleLogger.stLogger.setLogLevel(level);
     SimpleLogger.fileLogger.setLogLevel(level);

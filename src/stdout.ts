@@ -49,7 +49,7 @@ export class StLogger {
     let _data: any = data;
     _data.msg = Formatter.formatObj(msg, data);
     _data = this.buildEssentials(_data);
-    _data.level = this.theme.info("INFO");
+    _data.level = this.theme.info.underline("INFO");
     let line = Formatter.formatObj(this.format, _data);
     console.log(line);
   }
@@ -59,7 +59,7 @@ export class StLogger {
     let _data: any = data;
     _data.msg = this.theme.warning(Formatter.formatObj(msg, data));
     _data = this.buildEssentials(_data);
-    _data.level = this.theme.warning("WARN");
+    _data.level = this.theme.warning.bold("WARN");
     let line = Formatter.formatObj(this.format, _data);
     console.log(line);
   }
@@ -69,7 +69,7 @@ export class StLogger {
     let _data: any = data;
     _data.msg = this.theme.danger(Formatter.formatObj(msg, data));
     _data = this.buildEssentials(_data);
-    _data.level = this.theme.danger("ERROR");
+    _data.level = this.theme.danger.bold("ERROR");
     let line = Formatter.formatObj(this.format, _data);
     console.error(line);
   }
@@ -77,9 +77,9 @@ export class StLogger {
   public log(msg: string, data: object = {}) {
     if (!this.check("log")) return;
     let _data: any = data;
-    _data.msg = this.theme.danger(Formatter.formatObj(msg, data));
+    _data.msg = (Formatter.formatObj(msg, data));
     _data = this.buildEssentials(_data);
-    _data.level = this.theme.danger("LOG");
+    _data.level = this.theme.warning.underline("LOG");
     let line = Formatter.formatObj(this.format, _data);
     console.log(line);
   }
@@ -99,7 +99,7 @@ export class StLogger {
     let _data: any = data;
     _data.msg = Formatter.formatObj(msg, data);
     _data = this.buildEssentials(_data);
-    _data.level = this.theme.primary("DEBUG");
+    _data.level = this.theme.primary.bold("DEBUG");
     let line = Formatter.formatObj(this.format, _data);
     console.log(line);
   }
