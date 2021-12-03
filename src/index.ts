@@ -51,7 +51,7 @@ export class SimpleLogger {
     return this;
   }
 
-  public info(msg, data: any = { name: null }) {
+  public info(msg:string, data: any = { name: null }) {
     let _data = data;
     _data.name = this.name;
     if (SimpleLogger.isFile) SimpleLogger.fileLogger.info(msg, _data);
