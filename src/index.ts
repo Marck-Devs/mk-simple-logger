@@ -1,5 +1,5 @@
 import { FileLogger } from "./filelog";
-import { LogLevel } from "./levels";
+import ConfigLoader from "./ConfigLoader";
 import { StLogger } from "./stdout";
 import { ThemeBuilder } from "./theming";
 import chalk from "chalk";
@@ -10,13 +10,13 @@ export function ThemeBuild() {
   return new ThemeBuilder();
 }
 export class SimpleLogger {
-  private static logLevel: string = "warn";
+  private static logLevel: string = ConfigLoader.getConf('level', 'warn');
   private static _instance: SimpleLogger;
   private static isStdout: boolean = true;
   private static isFile: boolean = false;
-  private static logFile: string;
+  private static logFile: string= ConfigLoader.getConf('logFile', null);
   private static theme: ThemeBuilder = null;
-  private static errorFile: string;
+  private static errorFile: string = ConfigLoader.getConf('errorFile', null);
   private static stLogger: StLogger;
   private static fileLogger: FileLogger;
   private static format: string = "{date} [ {level} ] -> {name} -> {msg}";
@@ -24,6 +24,10 @@ export class SimpleLogger {
 
   private name: string;
 
+  /**
+  * constructor
+  * @param {string} name name of the logger
+  **/
   public constructor(name: string = "app") {
     if (!SimpleLogger.theme)
       SimpleLogger.theme = new ThemeBuilder();
@@ -162,5 +166,12 @@ export class SimpleLogger {
       SimpleLogger.fileLogger.setDateFormat(format);
       SimpleLogger.stLogger.setDateFormat(format);
     } catch (e) { }
+  }
+
+  public static global(){
+    if(!SimpleLogger._instance){
+      SimpleLogger._instance = new SimpleLogger();
+    }
+    return SimpleLogger._instance;
   }
 }
