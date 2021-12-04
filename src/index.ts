@@ -10,13 +10,13 @@ export function ThemeBuild() {
   return new ThemeBuilder();
 }
 export class SimpleLogger {
-  private static logLevel: string = ConfigLoader.getConf('level', 'warn');
+  private static logLevel: string = ConfigLoader.instance.getConf('level', 'warn');
   private static _instance: SimpleLogger;
   private static isStdout: boolean = true;
   private static isFile: boolean = false;
-  private static logFile: string= ConfigLoader.getConf('logFile', null);
+  private static logFile: string= ConfigLoader.instance.getConf('logFile', null);
   private static theme: ThemeBuilder = null;
-  private static errorFile: string = ConfigLoader.getConf('errorFile', null);
+  private static errorFile: string = ConfigLoader.instance.getConf('errorFile', null);
   private static stLogger: StLogger;
   private static fileLogger: FileLogger;
   private static format: string = "{date} [ {level} ] -> {name} -> {msg}";

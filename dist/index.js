@@ -178,12 +178,12 @@ var SimpleLogger = /** @class */ (function () {
         }
         return SimpleLogger._instance;
     };
-    SimpleLogger.logLevel = ConfigLoader_1["default"].getConf('level', 'warn');
+    SimpleLogger.logLevel = ConfigLoader_1["default"].instance.getConf('level', 'warn');
     SimpleLogger.isStdout = true;
     SimpleLogger.isFile = false;
-    SimpleLogger.logFile = ConfigLoader_1["default"].getConf('logFile', null);
+    SimpleLogger.logFile = ConfigLoader_1["default"].instance.getConf('logFile', null);
     SimpleLogger.theme = null;
-    SimpleLogger.errorFile = ConfigLoader_1["default"].getConf('errorFile', null);
+    SimpleLogger.errorFile = ConfigLoader_1["default"].instance.getConf('errorFile', null);
     SimpleLogger.format = "{date} [ {level} ] -> {name} -> {msg}";
     SimpleLogger.dateFormat = "{day}-{month}-{y} @ {hour}:{min}:{sec}";
     return SimpleLogger;

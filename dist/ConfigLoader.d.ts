@@ -1,7 +1,8 @@
 export default class ConfigLoader {
     static instance: ConfigLoader;
-    private static config;
+    private config;
     private constructor();
+    private conf;
     private checkEnv;
     /**
      * get config from the object
@@ -9,5 +10,5 @@ export default class ConfigLoader {
      * @param {string} _return the value to return if not found value
      * @returns {any} the value of the default value
      **/
-    static getConf(key: string, _return?: any): any;
+    getConf(key: string, _return?: any): any;
 }

@@ -1,29 +1,35 @@
 
 export default class ConfigLoader{
-	public static instance:ConfigLoader = new ConfigLoader();
-	private static config : any = {};
+	public static instance:ConfigLoader= new ConfigLoader();
+	private config : any = {};
 
 	private constructor(){
 		this.checkEnv();
+	}
+
+	private conf(){
+		if(!this.config)
+			this.config = {};
+		return this.config;
 	}
 
 	private checkEnv(){
 		// check if exists env config;
 		let config = process.env
 		if(config.LOGS_FOLDER){
-			ConfigLoader.config.folder =  config.LOGS_FOLDER;
+			this.conf().folder =  config.LOGS_FOLDER;
 		}
 
 		if(config.LOG_FILE)
-			ConfigLoader.config.logFile = config.LOG_FILE;
+			this.conf().logFile = config.LOG_FILE;
 
 		if(config.EROR_FILE){
-			ConfigLoader.config.erroFile = config.LOG_FILE;
+			this.conf().erroFile = config.LOG_FILE;
 		}
 
 		// set log level if it exists in the envirements variables
 		if(config.LEVEL){
-			ConfigLoader.config.level = config.LEVEL;
+			this.conf().level = config.LEVEL;
 		}
 
 		// set the log level by the node env if LEVEL not exists in enviroment
@@ -31,16 +37,16 @@ export default class ConfigLoader{
 			switch(config.NODE_ENV){
 				case "production":
 				case "deploy":
-					ConfigLoader.config.level = "log"
+					this.config.level = "log"
 					break;
 				case "debug":
 				case "devel":
 				case "development":
 				case "sandbox":
-					ConfigLoader.config.level = "debug";
+					this.config.level = "debug";
 				break;
 				default:
-					ConfigLoader.config.level = "info"
+					this.config.level = "info"
 					break;
 			}
 		}
@@ -51,9 +57,9 @@ export default class ConfigLoader{
 	 * @param {string} _return the value to return if not found value
 	 * @returns {any} the value of the default value
 	 **/
-	public static getConf(key:string, _return: any = false){
-		if( key in ConfigLoader.config ){
-			return ConfigLoader.config[key];
+	public getConf(key:string, _return: any = false){
+		if( key in this.conf() ){
+			return this.conf()[key];
 		}else{
 			return _return;
 		}
