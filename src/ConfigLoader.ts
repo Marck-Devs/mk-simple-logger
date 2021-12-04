@@ -45,5 +45,18 @@ export default class ConfigLoader{
 			}
 		}
 	}
+	/**
+	 * get config from the object
+	 * @param {string} key of the var
+	 * @param {string} _return the value to return if not found value
+	 * @returns {any} the value of the default value
+	 **/
+	public static getConf(key:string, _return: any = false){
+		if( key in ConfigLoader.config ){
+			return ConfigLoader.config[key];
+		}else{
+			return _return;
+		}
+	}
 
 }
