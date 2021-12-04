@@ -19,11 +19,10 @@
   "scripts": {
     "clean": "rm -rf build compile dist",
     "compile": "npx tsc",
-    "babel": "babel compile/src --out-dir build",
-    "exec": "clear && node build/index.js",
-    "build": "yarn compile && yarn babel",
+    "exec": "clear && node dist/index.js",
+    "build": "yarn clean && yarn compile",
     "start": "yarn build && yarn run exec",
-    "prod": "yarn clean && yarn compile &&  yarn babel compile/src --out-dir dist "
+    "prod": "yarn clean && yarn compile"
   },
   "displayName": "simple-logger",
   "description": "Simple logger for node",

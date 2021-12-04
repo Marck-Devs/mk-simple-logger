@@ -5,10 +5,12 @@ config options, like theming or set custom format.
 
 ## Usage
 
-The main class is `SimepleLogger` so you need to import from the module
+The main class is `SimpleLogger` so you need to import from the module
 
 ```js
-const SimpleLogger = require("simple-logger").SimpleLogger;
+const SimpleLogger = require("mk-simple-logger").SimpleLogger;
+// or
+const { SimpleLogger } = require('mk-simple-logger');
 let logger = new SimpleLogger("mylogger");
 logger.info("My Message");
 // -> 20/02/2021 @ 20:10:40 - [ info ] - mylogger - My message
@@ -32,7 +34,8 @@ logger.critical("");
 ### Set the log level
 
 ```js
-SimpleLogger.setLogLevel("debug"); // 'warn'| 'info' | 'log'
+SimpleLogger.setLogLevel("debug"); // 'warn'| 'info' | 'log' | 'error' |
+'critical'
 ```
 
 ### Set custom format
@@ -82,3 +85,6 @@ SimpleLogger.disableStdout();
 ```
 
 Logger can work with two options at the same time, they'r not restrictive.
+
+# Load configuration from the env
+
