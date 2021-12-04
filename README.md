@@ -2,7 +2,16 @@
 
 This a small package for node that allow implement a logger, and add same
 config options, like theming or set custom format.
-
+# Install
+The package is available in npm repositories.
+npm install
+```
+npm install mk-simple-logger
+```
+yarn install
+```
+yarn add mk-simple-logger
+```
 ## Usage
 
 The main class is `SimpleLogger` so you need to import from the module
@@ -87,4 +96,10 @@ SimpleLogger.disableStdout();
 Logger can work with two options at the same time, they'r not restrictive.
 
 # Load configuration from the env
+Simple logger can load same data from the enviroment if it's set.
+Can load:
+- `LEVEL` as `logLevel`
+- `LOG_FILE` for set the log's file
+- `ERROR_FILE` for set the errors' file
+- If `NODE_ENV` is set read it and set the log level from this env variable
 
