@@ -2,13 +2,24 @@
 
 This a small package for node that allow implement a logger, and add same
 config options, like theming or set custom format.
-
+# Install
+The package is available in npm repositories.
+npm install
+```
+npm install mk-simple-logger
+```
+yarn install
+```
+yarn add mk-simple-logger
+```
 ## Usage
 
-The main class is `SimepleLogger` so you need to import from the module
+The main class is `SimpleLogger` so you need to import from the module
 
 ```js
-const SimpleLogger = require("simple-logger").SimpleLogger;
+const SimpleLogger = require("mk-simple-logger").SimpleLogger;
+// or
+const { SimpleLogger } = require('mk-simple-logger');
 let logger = new SimpleLogger("mylogger");
 logger.info("My Message");
 // -> 20/02/2021 @ 20:10:40 - [ info ] - mylogger - My message
@@ -32,7 +43,8 @@ logger.critical("");
 ### Set the log level
 
 ```js
-SimpleLogger.setLogLevel("debug"); // 'warn'| 'info' | 'log'
+SimpleLogger.setLogLevel("debug"); // 'warn'| 'info' | 'log' | 'error' |
+'critical'
 ```
 
 ### Set custom format
@@ -82,3 +94,21 @@ SimpleLogger.disableStdout();
 ```
 
 Logger can work with two options at the same time, they'r not restrictive.
+
+# Load configuration from the env
+Simple logger can load same data from the enviroment if it's set.
+Can load:
+- `LEVEL` as `logLevel`
+- `LOG_FILE` for set the log's file
+- `ERROR_FILE` for set the errors' file
+- If `NODE_ENV` is set read it and set the log level from this env variable
+
+# Global usage
+It's posible to use the logger globally, for this prupose from version `0.1.4`
+has the static method `global()` that return an static instance of the logger:
+```js
+	const {SimpleLogger} = require('mk-simple-logger');
+	SimpleLogger.global().log('message'); // can access to all log method
+	SimpleLogger.global().setName('name'); // can set the global logger name
+```
+All methods all available for the glogal logger.

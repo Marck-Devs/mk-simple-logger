@@ -1,5 +1,5 @@
 import { FileLogger } from "./filelog";
-import { LogLevel } from "./levels";
+import ConfigLoader from "./ConfigLoader";
 import { StLogger } from "./stdout";
 import { ThemeBuilder } from "./theming";
 import chalk from "chalk";
@@ -10,12 +10,13 @@ export function ThemeBuild() {
   return new ThemeBuilder();
 }
 export class SimpleLogger {
-  private static logLevel: string = "warn";
+  private static logLevel: string = ConfigLoader.instance.getConf('level', 'warn');
   private static _instance: SimpleLogger;
   private static isStdout: boolean = true;
   private static isFile: boolean = false;
-  private static logFile: string;
-  private static errorFile: string;
+  private static logFile: string= ConfigLoader.instance.getConf('logFile', null);
+  private static theme: ThemeBuilder = null;
+  private static errorFile: string = ConfigLoader.instance.getConf('errorFile', null);
   private static stLogger: StLogger;
   private static fileLogger: FileLogger;
   private static format: string = "{date} [ {level} ] -> {name} -> {msg}";
@@ -23,7 +24,13 @@ export class SimpleLogger {
 
   private name: string;
 
+  /**
+  * constructor
+  * @param {string} name name of the logger
+  **/
   public constructor(name: string = "app") {
+    if (!SimpleLogger.theme)
+      SimpleLogger.theme = new ThemeBuilder();
     SimpleLogger.fileLogger = FileLogger.getLogger();
     SimpleLogger.fileLogger.setLogLevel(SimpleLogger.logLevel);
     SimpleLogger.fileLogger.setLogFile(SimpleLogger.logFile);
@@ -34,7 +41,7 @@ export class SimpleLogger {
     SimpleLogger.stLogger.setLogLevel(SimpleLogger.logLevel);
     SimpleLogger.stLogger.setFormat(SimpleLogger.format);
     SimpleLogger.stLogger.setDateFormat(SimpleLogger.dateFormat);
-
+    SimpleLogger.stLogger.setTheme(SimpleLogger.theme)
     this.name = name;
   }
 
@@ -48,7 +55,7 @@ export class SimpleLogger {
     return this;
   }
 
-  public info(msg, data: any = { name: null }) {
+  public info(msg:string, data: any = { name: null }) {
     let _data = data;
     _data.name = this.name;
     if (SimpleLogger.isFile) SimpleLogger.fileLogger.info(msg, _data);
@@ -86,7 +93,10 @@ export class SimpleLogger {
   }
 
   public static setTheme(theme: ThemeBuilder) {
-    SimpleLogger.stLogger.setTheme(theme);
+    SimpleLogger.theme = theme;
+    try {
+      SimpleLogger.stLogger.setTheme(theme);
+    } catch(e){}
   }
   /**
    * set the output file
@@ -94,7 +104,11 @@ export class SimpleLogger {
    */
   public static setLogFile(file: string) {
     SimpleLogger.logFile = file;
-    SimpleLogger.fileLogger.setLogFile(file);
+    // prevent error if is not set the logger
+    try {
+      SimpleLogger.fileLogger.setLogFile(file);
+    }
+    catch (e) { }
   }
 
   /**
@@ -103,7 +117,10 @@ export class SimpleLogger {
    */
   public static setErrorFile(file: string) {
     SimpleLogger.errorFile = file;
-    SimpleLogger.fileLogger.setErrorFile(file);
+    try {
+      SimpleLogger.fileLogger.setErrorFile(file);
+    }
+    catch (e) { }
   }
 
   /**
@@ -112,8 +129,11 @@ export class SimpleLogger {
    */
   public static setLogLevel(level: string) {
     SimpleLogger.logLevel = level;
-    SimpleLogger.stLogger.setLogLevel(level);
-    SimpleLogger.fileLogger.setLogLevel(level);
+    try{
+      SimpleLogger.stLogger.setLogLevel(level);
+      SimpleLogger.fileLogger.setLogLevel(level);
+    }
+    catch(e){}
   }
 
   public static enableFileLog() {
@@ -134,13 +154,24 @@ export class SimpleLogger {
 
   public static setFormat(format: string) {
     SimpleLogger.format = format;
-    SimpleLogger.fileLogger.setFormat(format);
-    SimpleLogger.stLogger.setFormat(format);
+    try{
+      SimpleLogger.fileLogger.setFormat(format);
+      SimpleLogger.stLogger.setFormat(format);
+    }catch(e) { }
   }
 
   public static setDateFormat(format: string) {
     SimpleLogger.dateFormat = format;
-    SimpleLogger.fileLogger.setDateFormat(format);
-    SimpleLogger.stLogger.setDateFormat(format);
+    try {
+      SimpleLogger.fileLogger.setDateFormat(format);
+      SimpleLogger.stLogger.setDateFormat(format);
+    } catch (e) { }
+  }
+
+  public static global(){
+    if(!SimpleLogger._instance){
+      SimpleLogger._instance = new SimpleLogger();
+    }
+    return SimpleLogger._instance;
   }
 }

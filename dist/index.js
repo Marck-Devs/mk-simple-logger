@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 exports.__esModule = true;
 exports.SimpleLogger = exports.ThemeBuild = exports.color = void 0;
 var filelog_1 = require("./filelog");
+var ConfigLoader_1 = __importDefault(require("./ConfigLoader"));
 var stdout_1 = require("./stdout");
 var theming_1 = require("./theming");
 var chalk_1 = __importDefault(require("chalk"));
@@ -17,8 +18,14 @@ function ThemeBuild() {
 }
 exports.ThemeBuild = ThemeBuild;
 var SimpleLogger = /** @class */ (function () {
+    /**
+    * constructor
+    * @param {string} name name of the logger
+    **/
     function SimpleLogger(name) {
         if (name === void 0) { name = "app"; }
+        if (!SimpleLogger.theme)
+            SimpleLogger.theme = new theming_1.ThemeBuilder();
         SimpleLogger.fileLogger = filelog_1.FileLogger.getLogger();
         SimpleLogger.fileLogger.setLogLevel(SimpleLogger.logLevel);
         SimpleLogger.fileLogger.setLogFile(SimpleLogger.logFile);
@@ -29,6 +36,7 @@ var SimpleLogger = /** @class */ (function () {
         SimpleLogger.stLogger.setLogLevel(SimpleLogger.logLevel);
         SimpleLogger.stLogger.setFormat(SimpleLogger.format);
         SimpleLogger.stLogger.setDateFormat(SimpleLogger.dateFormat);
+        SimpleLogger.stLogger.setTheme(SimpleLogger.theme);
         this.name = name;
     }
     /**
@@ -95,7 +103,11 @@ var SimpleLogger = /** @class */ (function () {
             SimpleLogger.stLogger.log(msg, data);
     };
     SimpleLogger.setTheme = function (theme) {
-        SimpleLogger.stLogger.setTheme(theme);
+        SimpleLogger.theme = theme;
+        try {
+            SimpleLogger.stLogger.setTheme(theme);
+        }
+        catch (e) { }
     };
     /**
      * set the output file
@@ -103,7 +115,11 @@ var SimpleLogger = /** @class */ (function () {
      */
     SimpleLogger.setLogFile = function (file) {
         SimpleLogger.logFile = file;
-        SimpleLogger.fileLogger.setLogFile(file);
+        // prevent error if is not set the logger
+        try {
+            SimpleLogger.fileLogger.setLogFile(file);
+        }
+        catch (e) { }
     };
     /**
      * Set the erro file
@@ -111,7 +127,10 @@ var SimpleLogger = /** @class */ (function () {
      */
     SimpleLogger.setErrorFile = function (file) {
         SimpleLogger.errorFile = file;
-        SimpleLogger.fileLogger.setErrorFile(file);
+        try {
+            SimpleLogger.fileLogger.setErrorFile(file);
+        }
+        catch (e) { }
     };
     /**
      * Set the log level
@@ -119,8 +138,11 @@ var SimpleLogger = /** @class */ (function () {
      */
     SimpleLogger.setLogLevel = function (level) {
         SimpleLogger.logLevel = level;
-        SimpleLogger.stLogger.setLogLevel(level);
-        SimpleLogger.fileLogger.setLogLevel(level);
+        try {
+            SimpleLogger.stLogger.setLogLevel(level);
+            SimpleLogger.fileLogger.setLogLevel(level);
+        }
+        catch (e) { }
     };
     SimpleLogger.enableFileLog = function () {
         SimpleLogger.isFile = true;
@@ -136,17 +158,32 @@ var SimpleLogger = /** @class */ (function () {
     };
     SimpleLogger.setFormat = function (format) {
         SimpleLogger.format = format;
-        SimpleLogger.fileLogger.setFormat(format);
-        SimpleLogger.stLogger.setFormat(format);
+        try {
+            SimpleLogger.fileLogger.setFormat(format);
+            SimpleLogger.stLogger.setFormat(format);
+        }
+        catch (e) { }
     };
     SimpleLogger.setDateFormat = function (format) {
         SimpleLogger.dateFormat = format;
-        SimpleLogger.fileLogger.setDateFormat(format);
-        SimpleLogger.stLogger.setDateFormat(format);
+        try {
+            SimpleLogger.fileLogger.setDateFormat(format);
+            SimpleLogger.stLogger.setDateFormat(format);
+        }
+        catch (e) { }
     };
-    SimpleLogger.logLevel = "warn";
+    SimpleLogger.global = function () {
+        if (!SimpleLogger._instance) {
+            SimpleLogger._instance = new SimpleLogger();
+        }
+        return SimpleLogger._instance;
+    };
+    SimpleLogger.logLevel = ConfigLoader_1["default"].instance.getConf('level', 'warn');
     SimpleLogger.isStdout = true;
     SimpleLogger.isFile = false;
+    SimpleLogger.logFile = ConfigLoader_1["default"].instance.getConf('logFile', null);
+    SimpleLogger.theme = null;
+    SimpleLogger.errorFile = ConfigLoader_1["default"].instance.getConf('errorFile', null);
     SimpleLogger.format = "{date} [ {level} ] -> {name} -> {msg}";
     SimpleLogger.dateFormat = "{day}-{month}-{y} @ {hour}:{min}:{sec}";
     return SimpleLogger;

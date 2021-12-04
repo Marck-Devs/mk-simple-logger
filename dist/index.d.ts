@@ -18,12 +18,17 @@ export declare class SimpleLogger {
     private static isStdout;
     private static isFile;
     private static logFile;
+    private static theme;
     private static errorFile;
     private static stLogger;
     private static fileLogger;
     private static format;
     private static dateFormat;
     private name;
+    /**
+    * constructor
+    * @param {string} name name of the logger
+    **/
     constructor(name?: string);
     /**
      * Set the name of the logger
@@ -31,7 +36,7 @@ export declare class SimpleLogger {
      * @returns current logger
      */
     setName(name: string): SimpleLogger;
-    info(msg: any, data?: any): void;
+    info(msg: string, data?: any): void;
     debug(msg: any, data?: any): void;
     warn(msg: any, data?: any): void;
     error(msg: any, data?: any): void;
@@ -59,4 +64,5 @@ export declare class SimpleLogger {
     static disableStdout(): void;
     static setFormat(format: string): void;
     static setDateFormat(format: string): void;
+    static global(): SimpleLogger;
 }
