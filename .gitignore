@@ -1,5 +1,7 @@
 build
 compile
 node_modules
+*-lock.*
 *.lock
 *.log
+*.test.*
