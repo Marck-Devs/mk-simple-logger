@@ -103,3 +103,12 @@ Can load:
 - `ERROR_FILE` for set the errors' file
 - If `NODE_ENV` is set read it and set the log level from this env variable
 
+# Global usage
+It's posible to use the logger globally, for this prupose from version `0.1.4`
+has the static method `global()` that return an static instance of the logger:
+```js
+	const {SimpleLogger} = require('mk-simple-logger');
+	SimpleLogger.global().log('message'); // can access to all log method
+	SimpleLogger.global().setName('name'); // can set the global logger name
+```
+All methods all available for the glogal logger.
