@@ -1,6 +1,7 @@
 import { Formatter } from "./utils";
 import { appendFileSync } from "fs";
 import { LogLevel } from "./levels";
+import { makeDateObject } from "./commons/date-utils";
 
 export class FileLogger {
   private format: string = "{date} - [ {level} ] - {msg}";
@@ -19,21 +20,8 @@ export class FileLogger {
   }
 
   private buildEssentials(obj: any) {
-    let date = new Date();
     let out = obj;
-    let dateObj = {
-      day: date.getDate(),
-      month: date.getMonth(),
-      year: date.getFullYear(),
-      y: date.getFullYear() % 100,
-      hour: date.getHours(),
-      min: date.getMinutes(),
-      sec: date.getSeconds(),
-      mil: date.getMilliseconds(),
-      weekDay: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"][
-        date.getDay()
-      ],
-    };
+    let dateObj = makeDateObject();
     out.date = Formatter.formatObj(this.dateFormat, dateObj);
     return out;
   }
