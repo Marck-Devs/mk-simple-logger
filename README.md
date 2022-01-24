@@ -1,4 +1,5 @@
-# Simple logger for NodeJs
+![MK Simple Logger](https://marck-devs.com/assets/img/SimpleLoggerLogo.png)
+# MK Simple Logger 
 
 This a small package for node that allow implement a logger, and add same
 config options, like theming or set custom format.
