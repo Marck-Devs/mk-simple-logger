@@ -2,7 +2,7 @@ function formatToSize(str, length, span = " ", prepend = false) {
     let LNG = str.length;
     let out = str;
     if (LNG < length) {
-        for (let i = LNG; i < length - LNG; i++) {
+        for (let i = LNG; i < length; i++) {
             if (prepend) {
                 out = span + out;
             } else {

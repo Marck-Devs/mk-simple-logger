@@ -7,7 +7,7 @@ function formatToSize(str, length, span, prepend) {
     var LNG = str.length;
     var out = str;
     if (LNG < length) {
-        for (var i = LNG; i < length - LNG; i++) {
+        for (var i = LNG; i < length; i++) {
             if (prepend) {
                 out = span + out;
             }
