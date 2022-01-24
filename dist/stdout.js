@@ -4,6 +4,7 @@ exports.StLogger = void 0;
 var utils_1 = require("./utils");
 var theming_1 = require("./theming");
 var levels_1 = require("./levels");
+var date_utils_1 = require("./commons/date-utils");
 var StLogger = /** @class */ (function () {
     function StLogger(them) {
         this.format = "{date} - [ {level} ] - {msg}";
@@ -16,19 +17,8 @@ var StLogger = /** @class */ (function () {
         return StLogger._instance;
     };
     StLogger.prototype.buildEssentials = function (obj) {
-        var date = new Date();
         var out = obj;
-        var dateObj = {
-            day: date.getDate(),
-            month: date.getMonth(),
-            year: date.getFullYear(),
-            y: date.getFullYear() % 100,
-            hour: date.getHours(),
-            min: date.getMinutes(),
-            sec: date.getSeconds(),
-            mil: date.getMilliseconds(),
-            weekDay: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"][date.getDay()]
-        };
+        var dateObj = (0, date_utils_1.makeDateObject)();
         out.date = utils_1.Formatter.formatObj(this.dateFormat, dateObj);
         return out;
     };
