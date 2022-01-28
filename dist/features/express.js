@@ -2,8 +2,9 @@
 exports.__esModule = true;
 exports.express = void 0;
 var index_1 = require("../index");
-function express(name) {
+function express(name, level) {
     if (name === void 0) { name = "request"; }
+    if (level === void 0) { level = 'info'; }
     return function (request, response, next) {
         var LOG = new index_1.SimpleLogger(name);
         var URL = request.url;
@@ -13,7 +14,7 @@ function express(name) {
         next(); // call next middleware
         response.on('finish', function () {
             var final = new Date().getTime();
-            LOG.info("{method} {url} resolve in {time}ms", {
+            LOG[level]("{method} {url} resolve in {time}ms", {
                 method: METHOD,
                 url: URL,
                 time: (final - init)

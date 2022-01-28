@@ -1,6 +1,6 @@
 
 import { SimpleLogger } from '../index';
-export function express(name = "request") {
+export function express(name = "request", level = 'info') {
     return function (request, response, next) {
         const LOG = new SimpleLogger(name);
         const URL = request.url;
@@ -10,7 +10,7 @@ export function express(name = "request") {
         next(); // call next middleware
         response.on('finish', function () {
             const final = new Date().getTime();
-            LOG.info("{method} {url} resolve in {time}ms", {
+            LOG[level]("{method} {url} resolve in {time}ms", {
                 method: METHOD,
                 url: URL,
                 time: (final - init)

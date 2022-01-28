@@ -1,5 +1,5 @@
 ![MK Simple Logger](https://marck-devs.com/assets/img/SimpleLoggerLogo.png)
-# MK Simple Logger 
+# MK Simple Logger
 
 This a small package for node that allow implement a logger, and add same
 config options, like theming or set custom format.
@@ -105,11 +105,37 @@ Can load:
 - If `NODE_ENV` is set read it and set the log level from this env variable
 
 # Global usage
-It's posible to use the logger globally, for this prupose from version `0.1.4`
+It's posible to use the logger globally, for this prupose from version [`0.1.4`](http://gitea.marck-devs.com/marck/mk-simple-logger/src/tag/v0.1.4)
 has the static method `global()` that return an static instance of the logger:
 ```js
 	const {SimpleLogger} = require('mk-simple-logger');
 	SimpleLogger.global().log('message'); // can access to all log method
-	SimpleLogger.global().setName('name'); // can set the global logger name
+	SimpleLogger.global().setName('name'); // can set the girglobal logger name
 ```
 All methods all available for the glogal logger.
+
+# Express integration
+Sice version [`0.1.8` ](http://gitea.marck-devs.com/marck/mk-simple-logger/src/tag/v0.1.8) can use built logger for express applications:
+```javascript
+function logger(?name: string, ?level: string): ExpressMiddleware
+```
+
+## Usage in express
+```javascript
+const express =  require('express');
+const app = express();
+const {SimpleLogger, logger} = require('mk-simple-logger');
+app.use(express.json());
+...
+app.use(logger('request', 'log'));
+...
+app.listen(8080);
+
+```
+On request:
+```
+GET /uri1
+logger:
+10-01-22 @ 10:00:11 [ LOG ] -> request -> GET /uri1 resolve in 200ms
+```
+The logger work like the main logger so you can enable the file logger.
