@@ -1,12 +1,12 @@
 {
   "name": "mk-simple-logger",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "main": "dist/index.js",
   "license": "MIT",
   "author": "Marck C. Guzman <marck@marck-devs.com> (http://marck-devs.com)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Marck-Devs/node-simple-logger"
+    "url": "http://gitea.marck-devs.com/marck/mk-simple-logger"
   },
   "devDependencies": {
     "@types/node": "^16.11.11",
@@ -30,6 +30,7 @@
     "logger",
     "log",
     "logging",
-    "node"
+    "node",
+    "express"
   ]
 }
