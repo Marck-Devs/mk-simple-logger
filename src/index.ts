@@ -3,6 +3,7 @@ import ConfigLoader from "./ConfigLoader";
 import { StLogger } from "./stdout";
 import { ThemeBuilder } from "./theming";
 import chalk from "chalk";
+import { express } from './features/express';
 export function color() {
   return chalk;
 }
@@ -14,7 +15,7 @@ export class SimpleLogger {
   private static _instance: SimpleLogger;
   private static isStdout: boolean = true;
   private static isFile: boolean = false;
-  private static logFile: string= ConfigLoader.instance.getConf('logFile', null);
+  private static logFile: string = ConfigLoader.instance.getConf('logFile', null);
   private static theme: ThemeBuilder = null;
   private static errorFile: string = ConfigLoader.instance.getConf('errorFile', null);
   private static stLogger: StLogger;
@@ -55,7 +56,7 @@ export class SimpleLogger {
     return this;
   }
 
-  public info(msg:string, data: any = { name: null }) {
+  public info(msg: string, data: any = { name: null }) {
     let _data = data;
     _data.name = this.name;
     if (SimpleLogger.isFile) SimpleLogger.fileLogger.info(msg, _data);
@@ -96,7 +97,7 @@ export class SimpleLogger {
     SimpleLogger.theme = theme;
     try {
       SimpleLogger.stLogger.setTheme(theme);
-    } catch(e){}
+    } catch (e) { }
   }
   /**
    * set the output file
@@ -129,11 +130,11 @@ export class SimpleLogger {
    */
   public static setLogLevel(level: string) {
     SimpleLogger.logLevel = level;
-    try{
+    try {
       SimpleLogger.stLogger.setLogLevel(level);
       SimpleLogger.fileLogger.setLogLevel(level);
     }
-    catch(e){}
+    catch (e) { }
   }
 
   public static enableFileLog() {
@@ -154,10 +155,10 @@ export class SimpleLogger {
 
   public static setFormat(format: string) {
     SimpleLogger.format = format;
-    try{
+    try {
       SimpleLogger.fileLogger.setFormat(format);
       SimpleLogger.stLogger.setFormat(format);
-    }catch(e) { }
+    } catch (e) { }
   }
 
   public static setDateFormat(format: string) {
@@ -168,10 +169,12 @@ export class SimpleLogger {
     } catch (e) { }
   }
 
-  public static global(){
-    if(!SimpleLogger._instance){
+  public static global() {
+    if (!SimpleLogger._instance) {
       SimpleLogger._instance = new SimpleLogger();
     }
     return SimpleLogger._instance;
   }
 }
+
+export let logger = express;

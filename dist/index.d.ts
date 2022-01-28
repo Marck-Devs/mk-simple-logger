@@ -1,5 +1,6 @@
 import { ThemeBuilder } from "./theming";
 import chalk from "chalk";
+import { express } from './features/express';
 export declare function color(): chalk.Chalk & chalk.ChalkFunction & {
     supportsColor: false | chalk.ColorSupport;
     Level: chalk.Level;
@@ -66,3 +67,4 @@ export declare class SimpleLogger {
     static setDateFormat(format: string): void;
     static global(): SimpleLogger;
 }
+export declare let logger: typeof express;

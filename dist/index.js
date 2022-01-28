@@ -3,12 +3,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
-exports.SimpleLogger = exports.ThemeBuild = exports.color = void 0;
+exports.logger = exports.SimpleLogger = exports.ThemeBuild = exports.color = void 0;
 var filelog_1 = require("./filelog");
 var ConfigLoader_1 = __importDefault(require("./ConfigLoader"));
 var stdout_1 = require("./stdout");
 var theming_1 = require("./theming");
 var chalk_1 = __importDefault(require("chalk"));
+var express_1 = require("./features/express");
 function color() {
     return chalk_1["default"];
 }
@@ -189,3 +190,4 @@ var SimpleLogger = /** @class */ (function () {
     return SimpleLogger;
 }());
 exports.SimpleLogger = SimpleLogger;
+exports.logger = express_1.express;
